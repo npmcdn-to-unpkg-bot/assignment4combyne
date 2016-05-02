@@ -5,18 +5,14 @@ var express = require('express');
 var ParseServer = require('parse-server').ParseServer;
 var path = require('path');
 
-var databaseUri = process.env.DATABASE_URI || process.env.MONGODB_URI;
-
-if (!databaseUri) {
-  console.log('DATABASE_URI not specified, falling back to localhost.');
-}
 
 var api = new ParseServer({
-  databaseURI: databaseUri || 'mongodb://localhost:27017/dev',
+  databaseURI: 'mongodb://try:try@ds055862.mlab.com:55862/heroku_fx2ftj7z',
   cloud: process.env.CLOUD_CODE_MAIN || __dirname + '/cloud/main.js',
-  appId: process.env.APP_ID || 'myAppId',
-  masterKey: process.env.MASTER_KEY || '', //Add your master key here. Keep it secret!
-  serverURL: process.env.SERVER_URL || 'http://localhost:1337/parse',  // Don't forget to change to https if needed
+  appId: process.env.APP_ID || 'PCceNdSbqYXTd2hN0KhKtiXr0BZGaALUX3WSCGx4',
+  javascriptKey: process.env.JS_KEY || 'iuLbs25h7U54eD0TSAX1BhNTVVLLqFL3vj6eBu7a',
+  masterKey: process.env.MASTER_KEY || 'eJC2cuumu6Mj3NQqRf7s2sDnXpqoW8fUD0sCWYRw', //Add your master key here. Keep it secret!
+  serverURL: process.env.SERVER_URL || 'http://assignmentjn.herokuapp.com/parse',  // Don't forget to change to https if needed
   liveQuery: {
     classNames: ["Posts", "Comments"] // List of classes to support for query subscriptions
   }
@@ -36,14 +32,9 @@ app.use(mountPath, api);
 
 // Parse Server plays nicely with the rest of your web routes
 app.get('/', function(req, res) {
-  res.status(200).send('Make sure to star the parse-server repo on GitHub!');
+  res.sendFile(path.join(__dirname, '/public/index.html'));
 });
 
-// There will be a test page available on the /test path of your server url
-// Remove this before launching your app
-app.get('/test', function(req, res) {
-  res.sendFile(path.join(__dirname, '/public/test.html'));
-});
 
 var port = process.env.PORT || 1337;
 var httpServer = require('http').createServer(app);

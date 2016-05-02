@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="Notepad">
+<head>
+	<meta charset="UTF-8">
+	<title>NotePad</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://npmcdn.com/angular-toastr/dist/angular-toastr.css" />
+	<link rel="stylesheet" href="public/assets/css/style.css">
+</head>
+<body ng-controller="MainController as main">
+	<div class="container">
+		<div class="row">
+			<a ng-click="main.addNote()" class="col-md-1" ><img src="https://maxcdn.icons8.com/iOS7/PNG/50/Science/plus_math-50.png" title="Plus Math" width="50"></a>
+			<h2 class="col-md-7 col-md-offset-4" >Notes</h2>
+		</div>
+		<div class="row">
+			<ul id="NoteList" class="col-md-2">
+				<li ng-repeat="note in main.notes" ng-class="main.isSelected(note)"><a ng-click="main.openNote(note.id)">{{note.attributes.title || "Time to start typing"}}</a></li>
+			</ul>
+			<div id="note" class="col-md-10">
+				<div class="row">
+					<textarea name="note" class="form-control" rows="20" ng-model="main.active.text"></textarea>
+				</div>
+				<div class="row">
+					<a ng-click="main.removeNote()" class="col-md-offset-9 col-md-1"><img src="https://maxcdn.icons8.com/iOS7/PNG/50/Very_Basic/empty_trash-50.png" title="Empty Trash" width="35"></a>
+					<a ng-click="main.saveNote()" class="col-md-2">Save</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="public/assets/js/angular.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.js"></script>
+	<script src="https://npmcdn.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+	<script src="http://www.parsecdn.com/js/parse-1.6.14.min.js"></script>
+	<script src="public/app/app.js"></script>
+
+</body>
+</html>	
