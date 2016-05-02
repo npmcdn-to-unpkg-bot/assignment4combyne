@@ -3,13 +3,11 @@
 Parse.initialize("PCceNdSbqYXTd2hN0KhKtiXr0BZGaALUX3WSCGx4");
 Parse.serverURL = 'http://assignmentjn.herokuapp.com/parse';
 
-
 angular.module('Notepad',['ngAnimate', 'toastr'])
 	.controller('MainController', function MainController($scope, $rootScope, toastr){
 		var vm = this;
-		vm.notes = [];
-		vm.active;
-		//vm.unsavedChange = false;
+		vm.notes = []; // list of notes from Parse server
+		vm.active; //open note
 
 		var NoteObj = Parse.Object.extend("Note");
 
@@ -79,12 +77,8 @@ angular.module('Notepad',['ngAnimate', 'toastr'])
 		};
 
 		vm.isSelected = function(note){
-			console.log(note);
-			console.log(vm.active);
 			if( vm.active && note.id == vm.active.id) return "selectedNote";
 		};
-
-
 	});
 
 	
